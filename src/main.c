@@ -7,7 +7,8 @@
 #include <stdint.h>
 #include <unistd.h>
 
-int main(int argc, char **argv){
+int main(int argc, char **argv)
+{
 	Strip s;
 	Socket sock;
 	unsigned int i;
@@ -15,18 +16,15 @@ int main(int argc, char **argv){
 	socket_open(&sock);
 	strip_zero(&s);
 
-	uint8_t color[3] = {0,0,0};
+	uint32_t color =0x000000;
 
 	while(1){
-		// Enter an RGB color in this format: "xx xx xx" 
-		scanf("%hhx %hhx %hhx", color, color+1, color+2);
+		// Enter an RGB color in this format: "xxxxxx" 
+		scanf("%x", &color);
 		// Set the leds
 		for (i=0; i<LED_COUNT; i++) {
-			s.leds[i].r = color[0];
-			s.leds[i].g = color[1];
-			s.leds[i].b = color[2];
+			setLed(color, s.leds + i);
 		}
-		
 		// All the strips do the same thing
 		for(i=0; i<STRIP_COUNT; i++){
 			s.index=(unsigned char)i;
@@ -34,6 +32,8 @@ int main(int argc, char **argv){
 		}
 		Barco_sleep_ms(30);
 	}
+	
+	// Disconnect sequence
 	socket_close(&sock);
 	socket_stop();
 	return 0;
