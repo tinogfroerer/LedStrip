@@ -50,6 +50,14 @@ union Strip_Buffer{
 };
 
 /**
+ * Sets rgb-value of an LED
+ *
+ * @param val hexvals stored in the LS-24bits
+ * @param led pointer to an led
+ */
+void setLed(uint32_t val, LED *led);
+
+/**
  * Updates the Strip_Buffer to socket
  * 
  * @param sock The socket to send the update to

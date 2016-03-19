@@ -15,3 +15,9 @@ RETURN_CODE strip_zero(Strip *strip){
 	return RETURN_OK;
 }
 
+void setLed(uint32_t val, LED *led)
+{
+	led->r = (uint8_t)((val >> 16) & 0xff);
+	led->g = (uint8_t)((val >> 8) & 0xff);
+	led->b = (uint8_t)(val & 0xff);
+}
