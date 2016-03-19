@@ -1,6 +1,7 @@
 #include "util.h"
 #include "strips.h"
 #include "socket.h"
+#include "mycolor.h"
 
 #include <stdio.h>
 #include <math.h>
@@ -16,14 +17,14 @@ int main(int argc, char **argv)
 	socket_open(&sock);
 	strip_zero(&s);
 
-	uint32_t color =0x000000;
+	//uint32_t color =0x000000;
 
 	while(1){
 		// Enter an RGB color in this format: "xxxxxx" 
-		scanf("%x", &color);
+		//scanf("%x", &color);
 		// Set the leds
 		for (i=0; i<LED_COUNT; i++) {
-			setLed(color, s.leds + i);
+			setLed(police(), s.leds + i);
 		}
 		// All the strips do the same thing
 		for(i=0; i<STRIP_COUNT; i++){
